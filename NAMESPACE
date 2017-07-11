@@ -1,0 +1,88 @@
+###
+### NAMESPACE
+###
+
+
+# cc00-bum
+import(methods)
+import(splines)
+import(Biobase)
+import(oompaBase)
+
+importFrom(stats, "anova")
+importFrom(stats, "update")
+
+importFrom("graphics", "abline", "legend", "lines", "par", "points",
+           "text", "title")
+importFrom("stats", "dbeta", "dnorm", "dwilcox", "fitted", "lm",
+           "loess", "model.matrix", "optim", "pf", "predict", "pt",
+           "qtukey", "var")
+
+importMethodsFrom(oompaBase,
+                  "hist", "image", "plot")
+importMethodsFrom(oompaBase,
+                  "print", "summary", "as.data.frame")
+
+exportMethods("show")
+exportMethods("anova")
+exportMethods("update")
+exportMethods("hist", "image", "plot")
+exportMethods("summary", "as.data.frame")
+
+exportMethods("countSignificant")
+exportMethods("selectSignificant")
+exportMethods("cutoffSignificant")
+
+## cc00-bum
+exportClasses("Bum")
+export("Bum")
+exportClasses("BumSummary")
+export("likelihoodBum")
+
+## cc01-ttest
+exportClasses("MultiTtest")
+export("MultiTtest")
+
+## cc02-EfronTibshirani
+export("rankSum", "dwil")
+exportClasses("MultiWilcoxonTest")
+export("MultiWilcoxonTest")
+
+## cc03-fastlm
+exportClasses("MultiLinearModel")
+export("MultiLinearModel")
+export("multiTukey")
+
+## cc04-Dudoit
+exportClasses("Dudoit")
+export("Dudoit")
+
+## cc05-tnom
+exportClasses("TNoM")
+export("TNoM")
+exportClasses("TNoMSummary")
+exportClasses("fullTNoM")
+
+## cc06-Sam
+exportClasses("Sam")
+export("Sam")
+exportClasses("SamSummary")
+
+## cc07-twoGroupStats
+exportClasses("TwoGroupStats")
+export("TwoGroupStats")
+
+## cc08-singleGroup
+exportClasses("SingleGroup")
+export("SingleGroup")
+
+## cc09-smoothT
+exportClasses("SmoothTtest")
+export("SmoothTtest")
+
+## cc10-pairedT
+exportClasses("MultiTtestPaired")
+export("MultiTtestPaired")
+exportClasses("MultiTtestUnequal")
+export("MultiTtestUnequal")
+

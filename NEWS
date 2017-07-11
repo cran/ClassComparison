@@ -1,0 +1,87 @@
+			Dear Emacs, please make this -*-Text-*- mode!
+	**************************************************
+	*						 *
+	*	       3.1 SERIES NEWS			 *
+	*						 *
+	**************************************************
+
+		CHANGES IN R VERSION 3.1.0
+
+ADMINISTRATIVE
+
+    o	Changed the LICENSE to Apache 2.0.
+
+		CHANGES IN R VERSION 3.0.1
+
+GENERAL
+
+    o	Moved to R-Forge.
+
+BUG FIXES
+
+    o	Made compatible with new R check steps that verify DESCRIPTION
+        and NAMESPACE dependencies.
+
+		CHANGES IN R VERSION 3.0.0
+
+STRUCTURAL CHANGES
+
+    o	Removed dependence on PreProcess.
+
+
+		CHANGES IN R VERSION 2.15.0
+
+BUG FIXES
+
+    o	Documentation updates.
+
+
+		CHANGES IN R VERSION 2.14.0
+
+NEW FEATURES
+
+    o	Compatibility changes related to R-2.14.
+
+
+		CHANGES IN R VERSION 2.12.0
+
+NEW FEATURES
+
+    o	Added regression tests to support code maintenance; no
+        user-visible changes.
+
+
+		CHANGES IN R VERSION 2.10.1
+
+NEW FEATURES
+
+    o	Moved matrix operations into oompaBase package to simplify
+        other package dependencies.
+
+
+		CHANGES IN R VERSION 2.10.0
+
+NEW FEATURES
+
+    o	Checked compatibility with R 2.10.0.
+
+
+		CHANGES IN R VERSION 2.9.0
+
+NEW FEATURES
+
+    o	Added support for namespaces
+
+BUG FIXES
+
+    o	Changed 'matrixMean', 'matrixVar', 'matrixT', and 'MultiTtest'
+        to allow them to give sensible results in the face of  missing
+        data.  Each function now has an additional argument, 'na.rm'
+        which defaults to 'FALSE' for the matrix functions and to
+        'TRUE' for the 'MultiTtest' function.
+
+    o   Changed the names of matrix functions for t-test variants to
+        conform to capitalization conventions. Specifically, changed
+        from 'matrixpairedT' to 'matrixPairedT' and from
+        'matrixunequalT' to 'matrixUnequalT'.
+

@@ -1,0 +1,326 @@
+%\VignetteIndexEntry{OOMPA ClassComparison}
+%\VignetteKeywords{OOMPA,Class Comparison,Differential Expression, Multiple Testing}
+%\VignetteDepends{oompaBase,ClassComparison}
+%\VignettePackage{ClassComparison}
+\documentclass{article}
+
+\usepackage{hyperref}
+
+\newcommand{\Rfunction}[1]{{\texttt{#1}}}
+\newcommand{\Robject}[1]{{\texttt{#1}}}
+\newcommand{\Rclass}[1]{{\texttt{#1}}}
+\newcommand{\Rpackage}[1]{{\textit{#1}}}
+
+\title{Class Comparison with OOMPA}
+\author{Kevin R. Coombes}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{Introduction}
+
+OOMPA is a suite of object-oriented tools for processing and analyzing
+large biological data sets, such as those arising from mRNA expression
+microarrays or mass spectrometry proteomics.  The
+\Rpackage{ClassComparison} package in OOMPA provides tools to work on
+the ``class comparison'' problem.  Class comparison is one of the three
+primary types of applications of microarrays described by Richard Simon
+and colleagues.  The point of these problems is to identify genes that
+behave differently in known classes; in other words, a typical class
+comparison problem is to find the genes that are differentially
+expressed between two types of samples.
+
+\section{Getting Started}
+
+No one will be surprised to learn that we start by loading the package
+into the current R session:
+<<lib>>=
+library(ClassComparison)
+@ 
+
+The main functions and classes in the ClassComparison package work
+either with data matrices or with \Robject{ExpressionSet} objects from
+the BioConductor \Rpackage{Biobase} package.  For the first set of
+examples in this vignette, we will use simulated data that represents
+different groups of samples:
+<<simu>>=
+set.seed(6781252) # for reproducibility
+nGenes <- 5000
+nSamp <- 15
+nDif <- 150
+delta <- 1
+fake.class <- factor(rep(c('A', 'B'), each=nSamp))
+fake.data <- matrix(rnorm(nGenes*nSamp*2), nrow=nGenes, ncol=2*nSamp)
+fake.data[1:nDif, 1:nSamp] <- fake.data[1:nDif, 1:nSamp] + delta
+fake.data[(nDif+1):(2*nDif), 1:nSamp] <- fake.data[(nDif+1):(2*nDif),
+                                                   1:nSamp] - delta
+@ 
+
+\section{Gene-by-gene t-tests}
+
+The simplest way to find differentially expressed genes is to perform
+a two-sample t-test on each gene. The \Rfunction{MultiTtest} class
+handles this operation, with a summary that carefully ensures that you
+know which class is associated with a positive t-statistic.
+
+<<mtt>>=
+mtt <- MultiTtest(fake.data, fake.class)
+summary(mtt)
+@ 
+
+\begin{figure}
+<<hist,fig=TRUE>>=
+hist(mtt, breaks=101)
+@ 
+\caption{Histogram of the gene-by-gene two-sample t-statistics}
+\label{fig:hist}
+\end{figure}
+
+\section{Beta-uniform mixture models to account for multiple testing}
+
+As everyone now knows, an inherent difficulty with performing
+a separate test for each gene is that the $p$-values must be adjusted
+to account for multiple testing.  A simple approach models the set of
+$p$-values using a beta-uniform mixture (BUM).  We can perform this
+analysis with a single command:
+<<bum>>=
+bum <- Bum(mtt@p.values)
+summary(bum)
+@ 
+
+The default value of the \Rfunction{summary} command is not very
+enlightening, but we can get a graphical overview of the distribution.
+The region below the horizontal blue line in Figure~\ref{fig:histbum}
+represents the uniform component of the mixture (i.e., genes that are
+not differentially expressed); the region between the blue line and
+the green curve represents the beta component (i.e., genes that are
+differentially expressed).  If we set a threshold for significance
+using some cutoff on the $p$-value (such as the one indicated by the
+vertical purple line in Figure~\ref{fig:histbum}), then we can divide the
+area into four regions representing true positives, false positives,
+true negatives, and false negatives.  These areas can then be used to
+estimate the false discovery rate (FDR) as a function of the threshold
+(Figure~\ref{fig:imagebum}).
+\begin{figure}
+<<fbum,fig=TRUE>>=
+hist(bum)
+abline(v=0.05, col="purple", lwd=2)
+@ 
+\caption{Results of the BUM analysis of the $p$-values.}
+\label{fig:histbum}
+\end{figure}
+
+\begin{figure}
+<<fbum2,fig=TRUE>>=
+image(bum)
+
+@ 
+\caption{Results of the BUM analysis of the $p$-values.}
+\label{fig:imagebum}
+\end{figure}
+
+The usual application of this idea is to choose a threshold that
+achieves a desired level of FDR.  For example, selecting genes with a
+$p$-value less than
+<<fdr>>=
+cutoffSignificant(bum, alpha=0.10, by="FDR")
+@ 
+should keep the FDR less than $10\%$.  The number of such genes is
+easily obtained with the command:
+<<fdr2>>=
+countSignificant(bum, alpha=0.10, by="FDR")
+@ 
+You can also get a logical vector that selects the significant genes:
+<<calls>>=
+selected <- selectSignificant(bum, alpha=0.10, by="FDR")
+@ 
+In our example, the truly significant genes are among the first $300$
+genes.  We can use this information to find out how close we are to
+the truth; the achieved FDR in this simulated example is pretty close
+to the target value of $10\%$. 
+<<truth>>=
+truth <- rep(FALSE, nGenes)
+truth[1:(2*nDif)] <- TRUE
+sum(selected & truth)
+mean(!truth[selected])
+@ 
+
+\section{Wilcoxon rank sum tests and empirical Bayes}
+
+In many applications of microarrays, it is unclear how the data
+should be transformed to achieve the approximate normality needed to
+justify a t-test. It may just be simpler to ignore the transformation
+problem and use nonparametric methods, like the Wilcoxon rank-sum
+test, that only use the ranks of the samples for the expression of
+each gene.
+
+<<mw>>=
+mw <- MultiWilcoxonTest(fake.data, fake.class)
+summary(mw)
+@ 
+
+A histogram (Figure~\ref{fig:wil}) of the Wilcoxon statistics
+indicates that the observed values have larger tails than expected by
+chance, suggesting that we ought to be able to pick out some genes
+that are significantly different.  To do this, we use an empirical
+Bayes method originally suggested by Efron and Tibshirani.  The idea
+is that we can decompose the Wilcoxon statistics as a mixture of those
+that arise from the null distribution (which is Wilcoxon with
+parameters based on the number of samples in each group) and some
+other component representing the differentially expressed genes. In
+that case, we can write the observed distribution $f(x)$ in the form:
+\[
+f(x) = \pi f_0(x) + (1 - \pi) f_1(x)
+\]
+where $f_0(x)$ is the known Wilcoxon distribution and $f_1(x)$ is
+unknown.  Since we can estimate $f(x)$ from the observed data, we can
+simply solve for the unknown distribution $f_1(x)$ provided we know
+the mixing parameter $\pi$, which represents the prior probability
+that a gene is not differentially expressed.  The ``empirical'' part
+of this empirical Bayes method comes down to selecting the prior $\pi$
+after looking at the data.  For, if we start with $\pi=1$, the
+posterior probability of being differentially expressed as a function
+of the observed statistic ends up taking on negative values
+(Figure~\ref{fig:wil2}), which is rather unpleasant.
+
+\begin{figure}
+<<mwf,fig=TRUE>>=
+hist(mw)
+@ 
+\caption{Histogram of the observed gene-by-gene Wilcoxon statistics.}
+\label{fig:wil}
+\end{figure}
+
+\begin{figure}
+<<wil2,fig=TRUE>>=
+plot(mw)
+abline(h=0)
+@ 
+\caption{Plot of the posterior probability of being differentially
+  expressed, assuming \textit{a priori} that no genes are different.}
+\label{fig:wil2}
+\end{figure}
+
+\begin{figure}
+<<wil3,fig=TRUE>>=
+plot(mw, prior=0.92, signif=0.9)
+abline(h=0)
+@ 
+\caption{Plot of the posterior probability of being differentially
+  expressed, assuming \textit{a priori} that $92\%$ of the genes are
+  not different.}
+\label{fig:wil3}
+\end{figure}
+
+By trial and error, we can find a value for $\pi$ that ensures that
+the posterior probabilities are always positive
+(Figure~\ref{fig:wil3}). In this case, something close to $0.94$ works
+okay.  We can then use a threshold on the posterior probabilities to
+set a significance cutoff on the Wilcoxon statistics.
+<<wilie>>=
+cutoffSignificant(mw, prior=0.94, signif=0.8)
+countSignificant(mw, prior=0.94, signif=0.8)
+wilsel <- selectSignificant(mw, prior=0.94, signif=0.8)
+sum(selected & wilsel)
+sum(truth & wilsel)
+@ 
+
+\section{Permutation based methods}
+
+The \Rfunction{Bum} method, as applied to the gene-by-gene t-tests of
+the \Rpackage{MultiTtest} class or to $p$-values fmo other tests,
+assumes that genes are independent.  This assumption is clearly false,
+and so various researchers have proposed permutation-based methods that
+retain the correlation structure between genes when trying to estimate
+the distribution of $p$-values.
+
+\subsection{Dudoit's method based on Westfall and Young} %'
+
+Sandrine Dudoit and colleagues introduced the idea of using the
+Westfall-Young stepdown procedure to control the family-wise error
+rate in a microarray study.  In our example, we can perform this
+analysis as follows:
+<<dud>>=
+dudoit <- Dudoit(fake.data, fake.class, nPerm=100)
+summary(dudoit)
+@ 
+\begin{figure}
+<<dudf,fig=TRUE>>=
+plot(dudoit)
+@ 
+\caption{Plot of the unadjusted (blue) and adjusted (black) $p$-values.}
+\label{fig:dud}
+\end{figure}
+
+To get good results, we probably need more than $100$ permutations,
+but this implementation (completely in R) is rather slow.  The default
+plot routine (Figure~\ref{fig:dud}) shows both the unadjusted and
+adjusted $p$-values.  In most cases, controlling the family-wise error
+rate (FWER) is viewed as overly conservative, since it tries to ensure that
+there are no false positive findings instead of trying to estimate the
+number or fraction of false positives.  In our example, using the
+Dudoit correction with FWER = $10\%$  finds very few differentially
+expressed genes:
+<<sig>>=
+countSignificant(dudoit, 0.10)
+@ 
+
+\section{Significance Analysis of Microarrays}
+
+Significance Analysis of Microarrays (SAM) is an alternative
+procedure, which is based on permutations but tries to control the FDR
+instead of the FWER.  We can get the results by:
+<<sam>>=
+sam <- Sam(fake.data, fake.class)
+summary(sam)
+@ 
+\begin{figure}
+<<fsam,fig=TRUE>>=
+plot(sam, tracks=seq(0.5, 2, by=0.5))
+@ 
+\caption{Quantile-quantile plot of the observed t-statistics against
+  the t-statistics expected from the permutation-based null
+  distribution.}
+\label{fig:sam}
+\end{figure}
+Based on the figure, we can probably take a cutoff of $1$ to define
+significance, which yields the following results
+<<samsig>>=
+cutoff <- 1
+countSignificant(sam, cutoff)
+sum(selectSignificant(sam, cutoff) & truth)
+@ 
+
+\section{Other class comparison approaches}
+
+The package contains several other methods for finding genes that are
+differentially expressed between known classes:
+\begin{enumerate}
+\item Total Number of Misclassification (\Rfunction{TNoM}): This
+  method was introduced by Yakhini and Ben-Dor and applied by Bittner
+  and colleagues in 2000. It has probably seen fewer applications than
+  it deserves, which this implementation may help rectify.
+\item The smooth (regularized) t-test (\Rfunction{SmoothTtest}): This
+  method was introduced by Baggerly and Coombes in 2001, but a large
+  number of authors have proposed similar ideas.  The basic idea is
+  that (even after log transformation) genes of similar intensity
+  appear to have similar variance, and that one can borrow strength
+  across genes to get better estimates of the variability even in
+  small microarray studies.
+\item Linear models (\Rfunction{MultiLinearModel}) can be constructed
+  using the usual R formula, providing generalization to one-way
+  designs with more than two classes to compare, or to factorial
+  designs.
+\item Gene-by-gene paired t-tests (\Rfunction{MultiTtestPaired}).
+\item Gene-by-gene t-tests assuming unequal variance in the two groups
+  (\Rfunction{MultiTtestUnequal}).
+\end{enumerate}
+A future version of this vignette may include more examples of their
+use; for now, you can read the examples in the help pages.
+
+
+\end{document}
+
+
