@@ -15,16 +15,16 @@
 }
 
 setClass('SmoothTtest',
-         representation(one='SingleGroup',
-                        two='SingleGroup',
-                        smooth.t.statistics='numeric',
-                        fit='data.frame',
-                        dif='numeric',
-                        avg='numeric',
-                        aname='character',
-                        bname='character',
-                        name='character',
-                        stats='TwoGroupStats'))
+         slots = c(one='SingleGroup',
+                   two='SingleGroup',
+                   smooth.t.statistics='numeric',
+                   fit='data.frame',
+                   dif='numeric',
+                   avg='numeric',
+                   aname='character',
+                   bname='character',
+                   name='character',
+                   stats='TwoGroupStats'))
 
 
 SmoothTtest <- function(stats, aname='Group One', bname='Group Two',

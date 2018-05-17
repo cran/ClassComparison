@@ -3,8 +3,8 @@
 # dudoit.ssc
 
 setClass('Dudoit',
-         representation('MultiTtest',
-                        adjusted.p = 'numeric'))
+         contains = 'MultiTtest',
+         slots = c(adjusted.p = 'numeric'))
 
 Dudoit <- function(data, classes, nPerm=1000, verbose=TRUE) {
   if(is.logical(classes)) classes <- factor(classes)

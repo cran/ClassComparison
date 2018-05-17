@@ -3,18 +3,18 @@
 # twoGroupStats.R
 
 setClass('TwoGroupStats',
-         representation(mean1 = 'numeric',
-                        mean2 = 'numeric',
-                        overallMean = 'numeric',
-                        var1 = 'numeric',
-                        var2 = 'numeric',
-                        overallVar = 'numeric',
-                        pooledVar = 'numeric',
-                        n1 = 'numeric',
-                        n2 = 'numeric',
-                        name1='character',
-                        name2='character',
-                        name='character'))
+         slots = c(mean1 = 'numeric',
+                   mean2 = 'numeric',
+                   overallMean = 'numeric',
+                   var1 = 'numeric',
+                   var2 = 'numeric',
+                   overallVar = 'numeric',
+                   pooledVar = 'numeric',
+                   n1 = 'numeric',
+                   n2 = 'numeric',
+                   name1='character',
+                   name2='character',
+                   name='character'))
 
 TwoGroupStats <- function(data, classes, name='comparison', name1='A', name2='B') {
   if (is.logical(classes)) classes <- factor(classes)

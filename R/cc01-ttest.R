@@ -1,11 +1,11 @@
 # Copyright (C) Kevin R. Coombes, 2007-2016
 
 setClass('MultiTtest',
-         representation(t.statistics='numeric',
-                        p.values='numeric',
-                        df='numeric',
-                        groups='character',
-                        call='call'))
+         slots = c(t.statistics='numeric',
+                   p.values='numeric',
+                   df='numeric',
+                   groups='character',
+                   call='call'))
 
 MultiTtest <- function(data, classes, na.rm=TRUE) {
   call <- match.call()

@@ -1,15 +1,15 @@
 # Copyright (C) Kevin R. Coombes, 2007-2012
 
 setClass('MultiLinearModel',
-         representation(call='call',
-                        model='formula',
-                        F.statistics='numeric',
-                        p.values='numeric',
-                        coefficients='matrix',
-                        predictions='matrix',
-                        sse='numeric',
-                        ssr='numeric',
-                        df='numeric'))
+         slots = c(call='call',
+                   model='formula',
+                   F.statistics='numeric',
+                   p.values='numeric',
+                   coefficients='matrix',
+                   predictions='matrix',
+                   sse='numeric',
+                   ssr='numeric',
+                   df='numeric'))
 
 
 MultiLinearModel <- function(form, clindata, arraydata) {

@@ -46,10 +46,10 @@ if (!isGeneric("update"))
 
 
 setClass('Bum',
-         representation(pvals='numeric',
-                        ahat='numeric', 
-                        lhat='numeric', 
-                        pihat='numeric'))
+         slots = c(pvals='numeric',
+                   ahat='numeric', 
+                   lhat='numeric', 
+                   pihat='numeric'))
 
 Bum <- function(pvals, ...) {
   if (all(is.na(pvals))) {
@@ -126,9 +126,9 @@ setMethod('hist', signature(x='Bum'),
 })
 
 setClass('BumSummary',
-         representation(bum='Bum',
-                        estimates='data.frame',
-                        Fhat='numeric'))
+         slots = c(bum='Bum',
+                   estimates='data.frame',
+                   Fhat='numeric'))
 
 setMethod('summary', signature(object='Bum'),
           function(object, tau=0.01, ...) {

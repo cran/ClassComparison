@@ -29,13 +29,13 @@ dwil <- function(q, m, n) {
 }
 
 setClass('MultiWilcoxonTest',
-         representation(xvals='numeric',
-                        rank.sum.statistics='numeric',
-                        pdf='numeric',
-                        theoretical.pdf='numeric',
-                        unravel='numeric',
-                        groups='character',
-                        call='call'))
+         slots = c(xvals='numeric',
+                   rank.sum.statistics='numeric',
+                   pdf='numeric',
+                   theoretical.pdf='numeric',
+                   unravel='numeric',
+                   groups='character',
+                   call='call'))
 
 
 MultiWilcoxonTest <- function(data, classes, histsize=NULL) {

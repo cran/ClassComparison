@@ -7,11 +7,11 @@
 # require(ttest)
 
 setClass('Sam',
-         representation(expected='numeric',
-                        observed='numeric',
-                        t.statistics='numeric',
-                        sim.data='matrix',
-                        call='call'))
+         slots = c(expected='numeric',
+                   observed='numeric',
+                   t.statistics='numeric',
+                   sim.data='matrix',
+                   call='call'))
 
 Sam <- function(data, classes, nPerm=100, verbose=TRUE) {
   call <- match.call()
@@ -66,12 +66,12 @@ setMethod('plot', signature(x='Sam', y='missing'),
 })
 
 setClass('SamSummary',
-         representation(fdr='numeric',
-                        hi='numeric',
-                        lo='numeric',
-                        cutoff='numeric',
-                        significant.calls='logical',
-                        average.false.count='numeric'))
+         slots = c(fdr='numeric',
+                   hi='numeric',
+                   lo='numeric',
+                   cutoff='numeric',
+                   significant.calls='logical',
+                   average.false.count='numeric'))
 
 setMethod('show', signature(object='SamSummary'),
           function(object) {

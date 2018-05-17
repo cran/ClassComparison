@@ -54,12 +54,12 @@
 ## Fits curve to sd vs mean, and scores pointwise estimates.
 
 setClass('SingleGroup',
-         representation(score='numeric',
-                        fit='list',
-                        avg='numeric',
-                        sd='numeric',
-                        span='numeric',
-                        name='character'))
+         slots = c(score='numeric',
+                   fit='list',
+                   avg='numeric',
+                   sd='numeric',
+                   span='numeric',
+                   name='character'))
 
 SingleGroup <- function(avg, sd, span=0.5, name='')
 {

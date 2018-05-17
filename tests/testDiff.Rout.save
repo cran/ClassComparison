@@ -1,6 +1,6 @@
 
-R version 3.4.0 (2017-04-21) -- "You Stupid Darkness"
-Copyright (C) 2017 The R Foundation for Statistical Computing
+R version 3.5.0 (2018-04-23) -- "Joy in Playing"
+Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-w64-mingw32/x64 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -46,7 +46,7 @@ P-values:
 Warning messages:
 1: In hist.default(wilstats, breaks = histbreaks, plot = FALSE, probability = TRUE) :
   argument 'probability' is not made use of
-2: In bs(X, degree = 3L, knots = c(93.6666666666667, 116.333333333333 :
+2: In bs(X, degree = 3L, knots = c(`33.33333%` = 93.6666666666667,  :
   some 'x' values beyond boundary knots may cause ill-conditioned bases
 > summary(mw)
 Call: MultiWilcoxonTest(data = data, classes = classes) 
@@ -153,4 +153,4 @@ Smooth T test of Group One versus Group Two
 > 
 > proc.time()
    user  system elapsed 
-   6.55    0.15    6.64 
+   3.58    0.17    4.24 

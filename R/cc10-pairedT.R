@@ -5,7 +5,7 @@
 
 ## class definition
 setClass('MultiTtestPaired',
-         representation('MultiTtest'))
+         contains = 'MultiTtest')
 
 MultiTtestPaired <- function (data, classes, pairing)
 {
@@ -37,8 +37,8 @@ setMethod('summary', signature(object='MultiTtestPaired'),
 
 ## class definition
 setClass('MultiTtestUnequal',
-         representation('MultiTtest',
-                        df='numeric'))
+         contains ='MultiTtest', 
+         slots = c(df='numeric'))
 
 MultiTtestUnequal <- function (data, classes)
 {

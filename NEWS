@@ -5,6 +5,13 @@
 	*						 *
 	**************************************************
 
+		CHANGES IN R VERSION 3.1.6
+
+UPDATES
+
+    o	Modified S4 classes to avoid using recently deprecated or
+        discouraged elements.
+
 		CHANGES IN R VERSION 3.1.0
 
 ADMINISTRATIVE

@@ -41,16 +41,16 @@ TNoM <- function(data, classes, verbose=TRUE) {
 }
 
 setClass('TNoM',
-         representation(data='matrix',
-                        tnomData='numeric',
-                        nCol='numeric',
-                        nRow='numeric',
-                        classifier='factor',
-                        call='call'))
+         slots = c(data='matrix',
+                   tnomData='numeric',
+                   nCol='numeric',
+                   nRow='numeric',
+                   classifier='factor',
+                   call='call'))
 
 setClass('TNoMSummary',
-         representation(TNoM='TNoM',
-                        counts='numeric'))
+         slots = c(TNoM='TNoM',
+                   counts='numeric'))
 
 setMethod('show', signature(object='TNoMSummary'),
           function(object) {
@@ -86,11 +86,11 @@ setMethod('summary', signature(object='TNoM'),
 }
 
 setClass('fullTNoM',
-         representation(dex='numeric',
-                        fakir='numeric',
-                        obs='numeric',
-                        scr='numeric',
-                        name='character'))
+         slots = c(dex='numeric',
+                   fakir='numeric',
+                   obs='numeric',
+                   scr='numeric',
+                   name='character'))
 
 setMethod('update', signature(object='TNoM'),
           function(object, nPerm=10, verbose=FALSE, ...)  {

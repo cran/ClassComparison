@@ -1,2 +1,4 @@
 Add an automated empirical-Bayes procedure to the Wilcoxon test in 
 cc02-efron-tibsirani.R do you don't need to eyeball the result.
+
+Add a "predict" method for MultiLinearModel objects. 
