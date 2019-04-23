@@ -1,4 +1,4 @@
-4e9cb78855476b489c93319f653289a8 *DESCRIPTION
+70c922c6a8e38c13832c16bd39592ab5 *DESCRIPTION
 0b9bc2017eb646580a403ca0e397d1b8 *NAMESPACE
 85aa2f2021f87a07df9adcd64ed905f4 *NEWS
 43c4078098dc2af1c500cd117069ee68 *R/cc00-bum.R
@@ -12,11 +12,11 @@ ed8e00e3a0b3ebe7be1475c9893e1556 *R/cc07-twoGroupStats.R
 a1063821e511a7f59fbbe51e609c29e3 *R/cc08-singleGroup.R
 da7c7405cf2e66c9f96e9d0927816842 *R/cc09-smoothT.R
 fdd2b775089c0df26867d7bbf6a589b5 *R/cc10-pairedT.R
-f167793ce55dc90fbdd2107f05d6ab87 *TODO
-c163ef00ca69aa598168fa76f6d4e4d5 *build/vignette.rds
+c7d9c54ceb7f8bd4ca6f163fc555dbe4 *TODO
+45c27eed223606163ccbc0f233f560e5 *build/vignette.rds
 6fad0a11eb16e03c95107e65afd681be *inst/doc/oompa-cc.R
 d0bbbda347523d0effa5e7269156aadc *inst/doc/oompa-cc.Rnw
-2c887a5e87d6e2bd6df9f8a18bf8f509 *inst/doc/oompa-cc.pdf
+da30d231420cfb409477e69c72b40ea5 *inst/doc/oompa-cc.pdf
 76e8156764311a11f14ef64aec87883a *inst/samples/exprSet-example.R
 2cba0d6196a1893be25a150f44a7624c *inst/samples/test00-BUM.R
 ea7ac1681ff315916c7c7584ebd3cdd7 *inst/samples/test01-ttest.R
@@ -46,8 +46,8 @@ ccc6585a8907fa7c59d24ddbda6fc2e9 *man/cc02-2-rankSum.Rd
 ae1d338158e2c99c6c6875eeff19db2a *man/cc07-0-TwoGroupStats-class.Rd
 bf328052aed0097b340d177249dfa3c0 *man/cc08-0-SingleGroup-class.Rd
 d590a9d10be4fb53e52a9234466572ed *man/cc09-0-SmoothTtest-class.Rd
-1a20868763cfbb5c832dbb13ee9dae7a *tests/testBum.R
-5bd894e7402663788231f84b3610925e *tests/testBum.Rout.save
-c93320231e7888375815e17c3c288c39 *tests/testDiff.R
-e1f706a3c24d44619e45509812fb819b *tests/testDiff.Rout.save
+32d177fdadf0f5c35eaf61d1e9b9167a *tests/testBum.R
+dfcddf3222cfb3c3ef6419f4b1dc0008 *tests/testBum.Rout.save
+b54bf1ef67a8d00df70e8d0cbd80380f *tests/testDiff.R
+89a0c7efa6bae870ff668d6003bb96fe *tests/testDiff.Rout.save
 d0bbbda347523d0effa5e7269156aadc *vignettes/oompa-cc.Rnw

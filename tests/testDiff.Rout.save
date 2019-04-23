@@ -1,5 +1,5 @@
 
-R version 3.5.0 (2018-04-23) -- "Joy in Playing"
+R version 3.5.1 (2018-07-02) -- "Feather Spray"
 Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-w64-mingw32/x64 (64-bit)
 
@@ -22,6 +22,7 @@ Loading required package: oompaBase
 > nSamplesPerGroup <- 10
 > nGroups <- 2
 > 
+> RNGversion("3.5.3")
 > set.seed(944637)
 > data <- matrix(rnorm(nGenes*nSamplesPerGroup*nGroups),
 +                nrow=nGenes)
@@ -153,4 +154,4 @@ Smooth T test of Group One versus Group Two
 > 
 > proc.time()
    user  system elapsed 
-   3.58    0.17    4.24 
+   3.49    0.06    3.55 
