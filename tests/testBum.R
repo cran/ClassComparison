@@ -1,6 +1,6 @@
 library(ClassComparison)
 
-RNGversion("3.5.3")
+suppressWarnings( RNGversion("3.5.3") )
 set.seed(782562)
 betaPerc <- 0.10
 nGenes <- 1000
