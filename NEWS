@@ -1,9 +1,24 @@
 			Dear Emacs, please make this -*-Text-*- mode!
 	**************************************************
 	*						 *
-	*	       3.1 SERIES NEWS			 *
+	*	       3.3 SERIES NEWS			 *
 	*						 *
 	**************************************************
+
+		CHANGES IN R VERSION 3.3.0
+
+UPDATES
+
+    o	Cleaned up the code in the MultiWilcoxonTest class so it can
+        be inherited in a reasonable way by other classes and packages
+        that want to implement an empirical bayes approach for high
+        dimensional data anlayses.
+
+		CHANGES IN R VERSION 3.2.0
+
+UPDATES
+
+    o	Added an 'as.data.frame' method to the MultiLinearModel class.
 
 		CHANGES IN R VERSION 3.1.6
 

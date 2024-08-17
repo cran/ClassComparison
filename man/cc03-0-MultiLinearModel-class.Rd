@@ -7,6 +7,7 @@
 \alias{plot,MultiLinearModel,missing-method}
 \alias{plot,MultiLinearModel,ANY-method}
 \alias{summary,MultiLinearModel-method}
+\alias{as.data.frame,MultiLinearModel-method}
 \docType{class}
 \title{Class "MultiLinearModel"}
 \description{
@@ -16,6 +17,7 @@
 \usage{
 MultiLinearModel(form, clindata, arraydata)
 \S4method{summary}{MultiLinearModel}(object, \dots)
+\S4method{as.data.frame}{MultiLinearModel}(x, row.names=NULL, optional=FALSE, \dots)
 \S4method{hist}{MultiLinearModel}(x, xlab='F Statistics', main=NULL, \dots)
 \S4method{plot}{MultiLinearModel,missing}(x, y, ylab='F Statistics', \dots)
 \S4method{plot}{MultiLinearModel,ANY}(x, y, xlab='F Statistics',
@@ -38,6 +40,8 @@ multiTukey(object, alpha)
   \item{ylab}{character string specifying label for the y-axis}
   \item{main}{character string specifying graph title}
   \item{\dots}{extra arguments for generic or plotting functions}
+  \item{row.names}{see the base version}
+  \item{optional}{see the base version}
   \item{alpha}{numeric scalar between \code{0} and \code{1} specifying
    the significance level for the Tukey test.}
 }

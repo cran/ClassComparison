@@ -3,9 +3,10 @@
 \alias{MultiWilcoxonTest-class}
 \alias{countSignificant,MultiWilcoxonTest-method}
 \alias{cutoffSignificant,MultiWilcoxonTest-method}
+\alias{selectSignificant,MultiWilcoxonTest-method}
+\alias{probDiff,MultiWilcoxonTest-method}
 \alias{hist,MultiWilcoxonTest-method}
 \alias{plot,MultiWilcoxonTest,missing-method}
-\alias{selectSignificant,MultiWilcoxonTest-method}
 \alias{summary,MultiWilcoxonTest-method}
 \docType{class}
 \title{Class "MultiWilcoxonTest"}
@@ -24,6 +25,7 @@ MultiWilcoxonTest(data, classes, histsize=NULL)
 \S4method{cutoffSignificant}{MultiWilcoxonTest}(object, prior, significance, \dots)
 \S4method{selectSignificant}{MultiWilcoxonTest}(object, prior, significance, \dots)
 \S4method{countSignificant}{MultiWilcoxonTest}(object, prior, significance, \dots)
+\S4method{probDiff}{MultiWilcoxonTest}(object, p0, \dots)
 }
 \arguments{
   \item{data}{either a data frame or matrix with numeric values, or an
@@ -43,6 +45,7 @@ MultiWilcoxonTest(data, classes, histsize=NULL)
   \item{ylab}{character string specifying label for the y axis}
   \item{ylim}{Plotting limits on the y-axis}
   \item{main}{character string specifying graph title}
+  \item{p0}{see prior.}
   \item{prior}{Prior probability that an arbitrary gene is not differentially
     expressed, or that an arbitrary row does not yield a significant
     Wilcoxon rank-sum statistic. }
@@ -69,7 +72,7 @@ MultiWilcoxonTest(data, classes, histsize=NULL)
 }
 \section{Slots}{
   \describe{
-    \item{\code{rank.sum.statistics}:}{numeric vector containing the
+    \item{\code{statistics}:}{numeric vector containing the
       computed rank-sum statistics.}
     \item{\code{xvals}:}{numeric vector, best thought of as the vector
       of possible rank-sum statistics given the sizes of the two groups.}
@@ -114,6 +117,10 @@ MultiWilcoxonTest(data, classes, histsize=NULL)
       logical vector for selecting significant test results.}
     \item{countSignificant(object, prior, significance, \dots)}{Count the
       number of significant test results.}
+    \item{probDiff(object, p0, \dots)}{Compute the probabilty that an
+      observed value comes from the "unusual" part of the mixture
+      distribution. Only exported so it can be inherited by other
+      classes....} 
   }
 }
 \value{

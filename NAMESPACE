@@ -32,6 +32,7 @@ exportMethods("summary", "as.data.frame")
 exportMethods("countSignificant")
 exportMethods("selectSignificant")
 exportMethods("cutoffSignificant")
+exportMethods("probDiff")
 
 ## cc00-bum
 exportClasses("Bum")

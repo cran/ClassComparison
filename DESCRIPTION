@@ -1,10 +1,12 @@
 Package: ClassComparison
-Version: 3.1.8
-Date: 2019-05-01
+Version: 3.3.2
+Date: 2024-08-16
 Title: Classes and Methods for "Class Comparison" Problems on
         Microarrays
-Author: Kevin R. Coombes
-Maintainer: Kevin R. Coombes <krc@silicovore.com>
+Authors@R: person(given = c("Kevin", "R."),
+                  family = "Coombes",
+                  role = c("aut", "cre"),
+                  email = "krc@silicovore.com")
 Description: Defines the classes used for "class comparison" problems
   in the OOMPA project (<http://oompa.r-forge.r-project.org/>). Class
   comparison includes tests for differential expression; see Simon's
@@ -16,6 +18,8 @@ LazyLoad: yes
 biocViews: Microarray, DifferentialExpression, MultipleComparisons
 URL: http://oompa.r-forge.r-project.org/
 NeedsCompilation: no
-Packaged: 2019-05-06 12:39:50 UTC; Kevin Coombes
+Packaged: 2024-08-16 21:50:32 UTC; kevin
+Author: Kevin R. Coombes [aut, cre]
+Maintainer: Kevin R. Coombes <krc@silicovore.com>
 Repository: CRAN
-Date/Publication: 2019-05-06 16:40:12 UTC
+Date/Publication: 2024-08-17 08:10:10 UTC

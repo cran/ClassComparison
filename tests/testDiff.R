@@ -4,7 +4,6 @@ nGenes <- 1000
 nSamplesPerGroup <- 10
 nGroups <- 2
 
-suppressWarnings( RNGversion("3.5.3") )
 set.seed(944637)
 data <- matrix(rnorm(nGenes*nSamplesPerGroup*nGroups),
                nrow=nGenes)
@@ -13,7 +12,7 @@ classes <- factor(rep(c("A", "B"), each=nSamplesPerGroup))
 mtt <- MultiTtest(data, classes)
 summary(mtt)
 
-mw <- MultiWilcoxonTest(data, classes)
+suppressWarnings(mw <- MultiWilcoxonTest(data, classes))
 summary(mw)
 
 mlm <- MultiLinearModel(Y ~ classes, data.frame(classes=classes), data)

@@ -8,6 +8,9 @@
 \alias{countSignificant}
 \alias{countSignificant-method}
 \alias{countSignificant,ANY-method}
+\alias{probDiff}
+\alias{probDiff-method}
+\alias{probDiff,ANY-method}
 \docType{methods}
 \title{Generic Methods for Significance}
 \description{
@@ -27,10 +30,13 @@
 \S4method{cutoffSignificant}{ANY}(object, \dots)
 \S4method{selectSignificant}{ANY}(object, \dots)
 \S4method{countSignificant}{ANY}(object, \dots)
+\S4method{probDiff}{ANY}(object, p0, \dots)
 }
 \arguments{
   \item{object}{an object that performs multiple statistical tests on
     microarray or proteomics data}
+  \item{p0}{Prior probability that an observed value comes from the
+    lnown distribution.}
   \item{\dots}{additional arguments affecting these generic methods}
 }
 \value{

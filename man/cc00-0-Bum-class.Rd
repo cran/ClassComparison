@@ -3,9 +3,9 @@
 \alias{Bum-class}
 \alias{countSignificant,Bum-method}
 \alias{cutoffSignificant,Bum-method}
+\alias{selectSignificant,Bum-method}
 \alias{hist,Bum-method}
 \alias{image,Bum-method}
-\alias{selectSignificant,Bum-method}
 \alias{summary,Bum-method}
 \alias{likelihoodBum}
 \docType{class}

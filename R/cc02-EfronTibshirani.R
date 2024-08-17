@@ -12,9 +12,10 @@ rankSum <- function(data, selector) {
   sum(rnk[1:n.x])
 }
 
-.probDiff <- function(object, p0) {
-  1-p0*object@theoretical.pdf/object@unravel
-}
+if (!isGeneric("probDiff"))
+  setGeneric("probDiff",
+             function(object, p0, ...) { standardGeneric("probDiff") }
+             )
 
 dwil <- function(q, m, n) {
   q <- q -sum(1:m)
@@ -30,13 +31,17 @@ dwil <- function(q, m, n) {
 
 setClass('MultiWilcoxonTest',
          slots = c(xvals='numeric',
-                   rank.sum.statistics='numeric',
+                   statistics='numeric',
                    pdf='numeric',
                    theoretical.pdf='numeric',
                    unravel='numeric',
                    groups='character',
                    call='call'))
 
+setMethod('probDiff', signature(object = 'MultiWilcoxonTest'),
+          function(object, p0, ...) {
+  1-p0*object@theoretical.pdf/object@unravel
+})
 
 MultiWilcoxonTest <- function(data, classes, histsize=NULL) {
   call <- match.call()
@@ -78,7 +83,7 @@ MultiWilcoxonTest <- function(data, classes, histsize=NULL) {
   
   unravel <- exp(YP+log(theoretical.pdf))
   new('MultiWilcoxonTest', call=call, groups=levels(classes),
-      xvals=xvals, rank.sum.statistics=wilstats, pdf=pdf,
+      xvals=xvals, statistics=wilstats, pdf=pdf,
       theoretical.pdf=theoretical.pdf, unravel=unravel)
 }
 
@@ -89,7 +94,7 @@ setMethod('hist', signature(x='MultiWilcoxonTest'),
                    main='',
                    ...) {
   top <- max(c(x@unravel, x@theoretical.pdf))
-  hist(x@rank.sum.statistics, probability=TRUE, breaks=100, ylim=c(0, top),
+  hist(x@statistics, probability=TRUE, breaks=100, ylim=c(0, top),
        xlim=c(min(x@xvals), max(x@xvals)), xlab=xlab, main=main)
   lines(x@xvals, x@theoretical.pdf, col=oompaColor$EXPECTED, lwd=2)
   lines(x@xvals, x@unravel, col=oompaColor$OBSERVED, lwd=2)
@@ -109,7 +114,7 @@ setMethod('plot', signature('MultiWilcoxonTest', 'missing'),
   plot(c(min(x@xvals), max(x@xvals)), c(-0.5,1), type='n',
        xlab=xlab, ylab=ylab, ylim=ylim, ...)
   toss <- unlist(lapply(prior, function(p, o) {
-    lines(o@xvals, .probDiff(o, p), err=-1)
+    lines(o@xvals, probDiff(o, p), err=-1)
   }, x))
   abline(h=significance, col=oompaColor$OBSERVED)
   invisible(x)
@@ -117,14 +122,14 @@ setMethod('plot', signature('MultiWilcoxonTest', 'missing'),
 
 setMethod('cutoffSignificant', signature(object='MultiWilcoxonTest'),
           function(object, prior, significance, ...) {
-            z <- .probDiff(object, prior)
+            z <- probDiff(object, prior)
             x <- object@xvals[z < significance]
             list(low=min(x), high=max(x))
           })
 
 setMethod('selectSignificant', signature(object='MultiWilcoxonTest'),
           function(object, prior, significance, ...) {
-            stats <- object@rank.sum.statistics
+            stats <- object@statistics
             lh <- cutoffSignificant(object, prior, significance)
             (stats < lh$low) | (stats > lh$high)
           })
@@ -139,13 +144,13 @@ setMethod('summary', signature(object='MultiWilcoxonTest'),
   lh <- cutoffSignificant(object, prior, significance)
   cat(paste('Call:', as.character(list(object@call)),'\n'))
   cat(paste('Row-by-row Wilcoxon rank-sum tests with',
-            length(object@rank.sum.statistics), 'rows\n\nRank-sum statistics:\n'))
-  print(summary(object@rank.sum.statistics))
+            length(object@statistics), 'rows\n\nRank-sum statistics:\n'))
+  print(summary(object@statistics))
   cat(paste('\nLarge values indicate an increase in class:',
             object@groups[1],'\n\n'))
   cat(paste('With prior =', prior, 'and alpha =', significance, '\n'))
-  cat(paste('\tthe upper tail contains', sum(object@rank.sum.statistics > lh$high),
+  cat(paste('\tthe upper tail contains', sum(object@statistics > lh$high),
             'values above', lh$high, '\n'))
-  cat(paste('\tthe lower tail contains', sum(object@rank.sum.statistics < lh$low),
+  cat(paste('\tthe lower tail contains', sum(object@statistics < lh$low),
             'values below', lh$low, '\n'))
 })

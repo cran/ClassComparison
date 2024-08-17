@@ -77,6 +77,15 @@ setMethod('plot', signature('MultiLinearModel', 'ANY'),
   plot(x@F.statistics, y, xlab=xlab, ylab=ylab, ...)
 })
 
+setMethod("as.data.frame", signature(x="MultiLinearModel"),
+          function (x, row.names=NULL, optional=FALSE, ...) {
+  data.frame(t(x@coefficients),
+             Fstats = x@F.statistics,
+             Pvalues = x@p.values,
+             DF1 = x@df[1],
+             DF2 = x@df[2])
+})
+
 multiTukey <- function(object, alpha) {
   mse <- object@sse/object@df[2]
   r <- 1 + object@df[1]

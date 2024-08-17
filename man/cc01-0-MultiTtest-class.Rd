@@ -21,7 +21,7 @@ MultiTtest(data, classes, na.rm=TRUE)
 }
 \arguments{
   \item{data}{either a data frame or matrix with numeric values, or an
-    \code{\link[=ExpressionSet-class]{ExpressionSet}} as defined
+    \code{\link[Biobase]{ExpressionSet}} as defined
     in the BioConductor tools for analyzing microarray data} 
   \item{classes}{If \code{data} is a data frame or matrix, then classes
     must be either a logical vector or a factor. If \code{data} is an
@@ -56,7 +56,7 @@ MultiTtest(data, classes, na.rm=TRUE)
 
   As with other class comparison functions that are part of the OOMPA,
   we can also perform statistical tests on
-  \code{\link[Biobase:class.ExpressionSet]{ExpressionSet}} objects from
+  \code{\link[Biobase]{ExpressionSet}} objects from
   the BioConductor libraries. In this case, we pass in an
   \code{ExpressionSet} object along with the name of a factor to use for
   splitting the data.
@@ -94,7 +94,7 @@ MultiTtest(data, classes, na.rm=TRUE)
   Kevin R. Coombes \email{krc@silicovore.com}
 }
 \seealso{
-  \code{\link{matrixT}},
+  \code{\link[oompaBase]{matrixT}},
   \code{\link{Bum}},
   \code{\link{Dudoit}},
   \code{\link{MultiLinearModel}}

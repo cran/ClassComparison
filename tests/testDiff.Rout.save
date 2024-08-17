@@ -1,7 +1,7 @@
 
-R version 3.6.0 (2019-04-26) -- "Planting of a Tree"
-Copyright (C) 2019 The R Foundation for Statistical Computing
-Platform: x86_64-w64-mingw32/x64 (64-bit)
+R version 4.4.1 (2024-06-14 ucrt) -- "Race for Your Life"
+Copyright (C) 2024 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -22,7 +22,6 @@ Loading required package: oompaBase
 > nSamplesPerGroup <- 10
 > nGroups <- 2
 > 
-> suppressWarnings( RNGversion("3.5.3") )
 > set.seed(944637)
 > data <- matrix(rnorm(nGenes*nSamplesPerGroup*nGroups),
 +                nrow=nGenes)
@@ -43,12 +42,7 @@ P-values:
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 0.00396 0.25717 0.50326 0.49595 0.71980 0.99873 
 > 
-> mw <- MultiWilcoxonTest(data, classes)
-Warning messages:
-1: In hist.default(wilstats, breaks = histbreaks, plot = FALSE, probability = TRUE) :
-  argument 'probability' is not made use of
-2: In bs(X, degree = 3L, knots = c(`33.33333%` = 93.6666666666667,  :
-  some 'x' values beyond boundary knots may cause ill-conditioned bases
+> suppressWarnings(mw <- MultiWilcoxonTest(data, classes))
 > summary(mw)
 Call: MultiWilcoxonTest(data = data, classes = classes) 
 Row-by-row Wilcoxon rank-sum tests with 1000 rows
@@ -105,7 +99,7 @@ Call: TNoM(data = data, classes = classes)
 
 Number of genes with maximum number of misclassifications:
   0   1   2   3   4   5   6   7   8   9  10 
-  0   0   0   9  38 134 242 367 201   9   0 
+  0   0   0   9  38 134 242 366 202   9   0 
 > 
 > sam <- Sam(data, classes)
 1 . 2 . 3 . 4 . 5 . 6 . 7 . 8 . 9 . 10 . 11 . 12 . 13 . 14 . 15 . 16 . 17 . 18 . 19 . 20 . 21 . 22 . 23 . 24 . 25 . 26 . 27 . 28 . 29 . 30 . 31 . 32 . 33 . 34 . 35 . 36 . 37 . 38 . 39 . 40 . 41 . 42 . 43 . 44 . 45 . 46 . 47 . 48 . 49 . 50 . 51 . 52 . 53 . 54 . 55 . 56 . 57 . 58 . 59 . 60 . 61 . 62 . 63 . 64 . 65 . 66 . 67 . 68 . 69 . 70 . 71 . 72 . 73 . 74 . 75 . 76 . 77 . 78 . 79 . 80 . 81 . 82 . 83 . 84 . 85 . 86 . 87 . 88 . 89 . 90 . 91 . 92 . 93 . 94 . 95 . 96 . 97 . 98 . 99 . 100 . 
@@ -154,4 +148,4 @@ Smooth T test of Group One versus Group Two
 > 
 > proc.time()
    user  system elapsed 
-   5.31    0.42    5.71 
+   1.73    0.09    1.87 
