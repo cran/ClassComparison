@@ -1,6 +1,6 @@
 Package: ClassComparison
-Version: 3.3.2
-Date: 2024-08-16
+Version: 3.3.5
+Date: 2025-02-04
 Title: Classes and Methods for "Class Comparison" Problems on
         Microarrays
 Authors@R: person(given = c("Kevin", "R."),
@@ -18,8 +18,8 @@ LazyLoad: yes
 biocViews: Microarray, DifferentialExpression, MultipleComparisons
 URL: http://oompa.r-forge.r-project.org/
 NeedsCompilation: no
-Packaged: 2024-08-16 21:50:32 UTC; kevin
+Packaged: 2025-02-04 21:58:29 UTC; kevin
 Author: Kevin R. Coombes [aut, cre]
 Maintainer: Kevin R. Coombes <krc@silicovore.com>
 Repository: CRAN
-Date/Publication: 2024-08-17 08:10:10 UTC
+Date/Publication: 2025-02-05 08:40:02 UTC

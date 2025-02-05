@@ -1,10 +1,10 @@
-e0ccfca8776bad668bfcb64a8b049b5f *DESCRIPTION
+ff5883e9f299b1e8170666b79c5e46de *DESCRIPTION
 641aab1b4d3a312eb9ca57fedae01d0b *NAMESPACE
 1de27ead592ac879aaa3243fe5cf72f8 *NEWS
 43c4078098dc2af1c500cd117069ee68 *R/cc00-bum.R
-158305190efd7ac6eced42c6932877e6 *R/cc01-ttest.R
+307ab728dce24a5f10a1bc1fa2eca954 *R/cc01-ttest.R
 3280ffa8650c747ac3be92dfcbaee926 *R/cc02-EfronTibshirani.R
-06d7b5d744399ff127f8efb075c5a03c *R/cc03-fastlm.R
+76db0273333b10667fcbad311c1283b0 *R/cc03-fastlm.R
 0fe0092baa5b85e080ebb23f00d17527 *R/cc04-Dudoit.R
 b8cf633d72b4e3cd38cb677b6f3a315c *R/cc05-tnom.R
 ca3dcb281671509c5775278f911baa97 *R/cc06-Sam.R
@@ -16,7 +16,7 @@ c7d9c54ceb7f8bd4ca6f163fc555dbe4 *TODO
 32807b358539766e2087e73a12457194 *build/vignette.rds
 6fad0a11eb16e03c95107e65afd681be *inst/doc/oompa-cc.R
 d0bbbda347523d0effa5e7269156aadc *inst/doc/oompa-cc.Rnw
-f534ca34a08703fc455f2695fef6aaa4 *inst/doc/oompa-cc.pdf
+6ff532dfba9b1c0adbfb355af8dec413 *inst/doc/oompa-cc.pdf
 76e8156764311a11f14ef64aec87883a *inst/samples/exprSet-example.R
 2cba0d6196a1893be25a150f44a7624c *inst/samples/test00-BUM.R
 ea7ac1681ff315916c7c7584ebd3cdd7 *inst/samples/test01-ttest.R
@@ -48,6 +48,4 @@ bf328052aed0097b340d177249dfa3c0 *man/cc08-0-SingleGroup-class.Rd
 d590a9d10be4fb53e52a9234466572ed *man/cc09-0-SmoothTtest-class.Rd
 786992633bc3f9b4d28f8bfc5c899bfb *tests/testBum.R
 ddda285e8f2141d78fcd26ef74b76fd0 *tests/testBum.Rout.save
-3f74e8e36336e6218bb21704a05b16c9 *tests/testDiff.R
-230d7b5f8d0eb31adf862e28499361cf *tests/testDiff.Rout.save
 d0bbbda347523d0effa5e7269156aadc *vignettes/oompa-cc.Rnw

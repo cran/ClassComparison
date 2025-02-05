@@ -37,9 +37,9 @@ setMethod('summary', signature(object='MultiTtest'),
   cat(paste('Positive sign indicates an increase in class:',
             object@groups[1],'\n\n'))
   cat(paste('Call:', as.character(list(object@call)),'\n\nT-statistics:\n'))
-  print(summary(object@t.statistics))
+  print(summary(object@t.statistics, ...))
   cat('\nP-values:\n')
-  summary(object@p.values)
+  summary(object@p.values, ...)
 })
 
 setMethod('hist', signature(x='MultiTtest'),
