@@ -157,5 +157,3 @@ plot(sam, tracks=seq(0.5, 2, by=0.5))
 cutoff <- 1
 countSignificant(sam, cutoff)
 sum(selectSignificant(sam, cutoff) & truth)
-
-

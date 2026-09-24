@@ -1,4 +1,4 @@
-ff5883e9f299b1e8170666b79c5e46de *DESCRIPTION
+0d45e480f3fe9a6d16c87c435d88c198 *DESCRIPTION
 641aab1b4d3a312eb9ca57fedae01d0b *NAMESPACE
 1de27ead592ac879aaa3243fe5cf72f8 *NEWS
 43c4078098dc2af1c500cd117069ee68 *R/cc00-bum.R
@@ -13,10 +13,10 @@ a1063821e511a7f59fbbe51e609c29e3 *R/cc08-singleGroup.R
 da7c7405cf2e66c9f96e9d0927816842 *R/cc09-smoothT.R
 fdd2b775089c0df26867d7bbf6a589b5 *R/cc10-pairedT.R
 c7d9c54ceb7f8bd4ca6f163fc555dbe4 *TODO
-32807b358539766e2087e73a12457194 *build/vignette.rds
-6fad0a11eb16e03c95107e65afd681be *inst/doc/oompa-cc.R
+3dbf9545d25d46426e18ef5a9e9ebcc5 *build/vignette.rds
+ba457118bc456f9bbed22025afd298f8 *inst/doc/oompa-cc.R
 d0bbbda347523d0effa5e7269156aadc *inst/doc/oompa-cc.Rnw
-6ff532dfba9b1c0adbfb355af8dec413 *inst/doc/oompa-cc.pdf
+318a7d83a0fc3bf7fd3e98917c6a2b91 *inst/doc/oompa-cc.pdf
 76e8156764311a11f14ef64aec87883a *inst/samples/exprSet-example.R
 2cba0d6196a1893be25a150f44a7624c *inst/samples/test00-BUM.R
 ea7ac1681ff315916c7c7584ebd3cdd7 *inst/samples/test01-ttest.R
